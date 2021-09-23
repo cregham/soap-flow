@@ -1,1 +1,0 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="SpecFlowSOAP.UserService" CodeBehind="~/App_Code/Users/UserService.cs" %>
