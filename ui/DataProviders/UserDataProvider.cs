@@ -18,9 +18,14 @@ namespace ui.Core
             return _userServiceClient.GetUsers();
         }
 
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
-            return _userServiceClient.GetUser(id);
+            return _userServiceClient.GetUserById(id);
+        }
+
+        public User GetUserByName(string name)
+        {
+            return _userServiceClient.GetUserByName(name);
         }
 
         public void AddUser(User user)

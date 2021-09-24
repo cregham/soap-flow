@@ -90,45 +90,126 @@ namespace ui.SpecFlowSOAP {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
+    [System.SerializableAttribute()]
+    public partial class GenericFault : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MessageField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private int ResponseCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Message {
+            get {
+                return this.MessageField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MessageField, value) != true)) {
+                    this.MessageField = value;
+                    this.RaisePropertyChanged("Message");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ResponseCode {
+            get {
+                return this.ResponseCodeField;
+            }
+            set {
+                if ((this.ResponseCodeField.Equals(value) != true)) {
+                    this.ResponseCodeField = value;
+                    this.RaisePropertyChanged("ResponseCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="SpecFlowSOAP.IUserService")]
     public interface IUserService {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUser", ReplyAction="http://tempuri.org/IUserService/GetUserResponse")]
-        ui.SpecFlowSOAP.User GetUser(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserById", ReplyAction="http://tempuri.org/IUserService/GetUserByIdResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/GetUserByIdGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
+        ui.SpecFlowSOAP.User GetUserById(int id);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUser", ReplyAction="http://tempuri.org/IUserService/GetUserResponse")]
-        System.Threading.Tasks.Task<ui.SpecFlowSOAP.User> GetUserAsync(int id);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserById", ReplyAction="http://tempuri.org/IUserService/GetUserByIdResponse")]
+        System.Threading.Tasks.Task<ui.SpecFlowSOAP.User> GetUserByIdAsync(int id);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserByName", ReplyAction="http://tempuri.org/IUserService/GetUserByNameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/GetUserByNameGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
+        ui.SpecFlowSOAP.User GetUserByName(string name);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUserByName", ReplyAction="http://tempuri.org/IUserService/GetUserByNameResponse")]
+        System.Threading.Tasks.Task<ui.SpecFlowSOAP.User> GetUserByNameAsync(string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUsers", ReplyAction="http://tempuri.org/IUserService/GetUsersResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/GetUsersGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
         ui.SpecFlowSOAP.User[] GetUsers();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/GetUsers", ReplyAction="http://tempuri.org/IUserService/GetUsersResponse")]
         System.Threading.Tasks.Task<ui.SpecFlowSOAP.User[]> GetUsersAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddUser", ReplyAction="http://tempuri.org/IUserService/AddUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/AddUserGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
         void AddUser(ui.SpecFlowSOAP.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/AddUser", ReplyAction="http://tempuri.org/IUserService/AddUserResponse")]
         System.Threading.Tasks.Task AddUserAsync(ui.SpecFlowSOAP.User user);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RemoveUser", ReplyAction="http://tempuri.org/IUserService/RemoveUserResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/RemoveUserGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
         void RemoveUser(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/RemoveUser", ReplyAction="http://tempuri.org/IUserService/RemoveUserResponse")]
         System.Threading.Tasks.Task RemoveUserAsync(int id);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SetName", ReplyAction="http://tempuri.org/IUserService/SetNameResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/SetNameGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
         void SetName(int id, string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SetName", ReplyAction="http://tempuri.org/IUserService/SetNameResponse")]
         System.Threading.Tasks.Task SetNameAsync(int id, string name);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SetAge", ReplyAction="http://tempuri.org/IUserService/SetAgeResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/SetAgeGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
         void SetAge(int id, int age);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/SetAge", ReplyAction="http://tempuri.org/IUserService/SetAgeResponse")]
         System.Threading.Tasks.Task SetAgeAsync(int id, int age);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Ping", ReplyAction="http://tempuri.org/IUserService/PingResponse")]
+        [System.ServiceModel.FaultContractAttribute(typeof(ui.SpecFlowSOAP.GenericFault), Action="http://tempuri.org/IUserService/PingGenericFaultFault", Name="GenericFault", Namespace="http://schemas.datacontract.org/2004/07/soapapi")]
+        bool Ping();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IUserService/Ping", ReplyAction="http://tempuri.org/IUserService/PingResponse")]
+        System.Threading.Tasks.Task<bool> PingAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
@@ -158,12 +239,20 @@ namespace ui.SpecFlowSOAP {
                 base(binding, remoteAddress) {
         }
         
-        public ui.SpecFlowSOAP.User GetUser(int id) {
-            return base.Channel.GetUser(id);
+        public ui.SpecFlowSOAP.User GetUserById(int id) {
+            return base.Channel.GetUserById(id);
         }
         
-        public System.Threading.Tasks.Task<ui.SpecFlowSOAP.User> GetUserAsync(int id) {
-            return base.Channel.GetUserAsync(id);
+        public System.Threading.Tasks.Task<ui.SpecFlowSOAP.User> GetUserByIdAsync(int id) {
+            return base.Channel.GetUserByIdAsync(id);
+        }
+        
+        public ui.SpecFlowSOAP.User GetUserByName(string name) {
+            return base.Channel.GetUserByName(name);
+        }
+        
+        public System.Threading.Tasks.Task<ui.SpecFlowSOAP.User> GetUserByNameAsync(string name) {
+            return base.Channel.GetUserByNameAsync(name);
         }
         
         public ui.SpecFlowSOAP.User[] GetUsers() {
@@ -204,6 +293,14 @@ namespace ui.SpecFlowSOAP {
         
         public System.Threading.Tasks.Task SetAgeAsync(int id, int age) {
             return base.Channel.SetAgeAsync(id, age);
+        }
+        
+        public bool Ping() {
+            return base.Channel.Ping();
+        }
+        
+        public System.Threading.Tasks.Task<bool> PingAsync() {
+            return base.Channel.PingAsync();
         }
     }
 }

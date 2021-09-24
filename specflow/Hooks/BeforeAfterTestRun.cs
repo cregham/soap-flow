@@ -10,8 +10,6 @@ namespace automation.Hooks
         [BeforeTestRun]
         public static void BeforeTestRun()
         {
-            GlobalHook.Client = new UIClient();
-            GlobalHook.UserService = new UserServiceClient();
         }
 
         [AfterTestRun]

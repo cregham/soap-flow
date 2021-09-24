@@ -10,7 +10,7 @@
 // ------------------------------------------------------------------------------
 #region Designer generated code
 #pragma warning disable
-namespace automation.Features.API
+namespace automation.Features.UI
 {
     using TechTalk.SpecFlow;
     using System;
@@ -19,22 +19,25 @@ namespace automation.Features.API
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("TechTalk.SpecFlow", "3.9.0.0")]
     [System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [TechTalk.SpecRun.FeatureAttribute("GetUsers", Description="\tTesting the User Service", SourceFile="Features\\API\\GetUsers.feature", SourceLine=0)]
-    public partial class GetUsersFeature
+    [TechTalk.SpecRun.FeatureAttribute("Users", new string[] {
+            "Ui"}, Description="\tTesting the UI that configures users", SourceFile="Features\\UI\\Users.feature", SourceLine=1)]
+    public partial class UsersFeature
     {
         
         private TechTalk.SpecFlow.ITestRunner testRunner;
         
-        private string[] _featureTags = ((string[])(null));
+        private string[] _featureTags = new string[] {
+                "Ui"};
         
-#line 1 "GetUsers.feature"
+#line 1 "Users.feature"
 #line hidden
         
         [TechTalk.SpecRun.FeatureInitialize()]
         public virtual void FeatureSetup()
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
-            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/API", "GetUsers", "\tTesting the User Service", ProgrammingLanguage.CSharp, ((string[])(null)));
+            TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Features/UI", "Users", "\tTesting the UI that configures users", ProgrammingLanguage.CSharp, new string[] {
+                        "Ui"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -70,16 +73,14 @@ namespace automation.Features.API
             testRunner.CollectScenarioErrors();
         }
         
-        [TechTalk.SpecRun.ScenarioAttribute("Get Users should populate Box", new string[] {
-                "UserTests"}, SourceLine=4)]
-        public virtual void GetUsersShouldPopulateBox()
+        [TechTalk.SpecRun.ScenarioAttribute("Opening the UI", SourceLine=4)]
+        public virtual void OpeningTheUI()
         {
-            string[] tagsOfScenario = new string[] {
-                    "UserTests"};
+            string[] tagsOfScenario = ((string[])(null));
             System.Collections.Specialized.OrderedDictionary argumentsOfScenario = new System.Collections.Specialized.OrderedDictionary();
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Get Users should populate Box", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Opening the UI", null, tagsOfScenario, argumentsOfScenario, this._featureTags);
 #line 5
-this.ScenarioInitialize(scenarioInfo);
+ this.ScenarioInitialize(scenarioInfo);
 #line hidden
             bool isScenarioIgnored = default(bool);
             bool isFeatureIgnored = default(bool);
@@ -102,10 +103,7 @@ this.ScenarioInitialize(scenarioInfo);
  testRunner.Given("that I have opened the ui client", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
 #line hidden
 #line 7
- testRunner.When("I click the \'Get Users\' button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line hidden
-#line 8
- testRunner.Then("The users should populate the listbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.Then("the users should populate the listbox", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             }
             this.ScenarioCleanup();

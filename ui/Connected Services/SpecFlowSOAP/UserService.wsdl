@@ -3,15 +3,27 @@
   <wsdl:types>
     <xsd:schema targetNamespace="http://tempuri.org/Imports">
       <xsd:import schemaLocation="http://localhost:63228/UserService.svc?xsd=xsd0" namespace="http://tempuri.org/" />
-      <xsd:import schemaLocation="http://localhost:63228/UserService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
       <xsd:import schemaLocation="http://localhost:63228/UserService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/soapapi" />
+      <xsd:import schemaLocation="http://localhost:63228/UserService.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
     </xsd:schema>
   </wsdl:types>
-  <wsdl:message name="IUserService_GetUser_InputMessage">
-    <wsdl:part name="parameters" element="tns:GetUser" />
+  <wsdl:message name="IUserService_GetUserById_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserById" />
   </wsdl:message>
-  <wsdl:message name="IUserService_GetUser_OutputMessage">
-    <wsdl:part name="parameters" element="tns:GetUserResponse" />
+  <wsdl:message name="IUserService_GetUserById_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserById_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q1="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q1:GenericFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserByName_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByName" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserByName_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetUserByNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_GetUserByName_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q2="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q2:GenericFault" />
   </wsdl:message>
   <wsdl:message name="IUserService_GetUsers_InputMessage">
     <wsdl:part name="parameters" element="tns:GetUsers" />
@@ -19,11 +31,17 @@
   <wsdl:message name="IUserService_GetUsers_OutputMessage">
     <wsdl:part name="parameters" element="tns:GetUsersResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_GetUsers_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q3="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q3:GenericFault" />
+  </wsdl:message>
   <wsdl:message name="IUserService_AddUser_InputMessage">
     <wsdl:part name="parameters" element="tns:AddUser" />
   </wsdl:message>
   <wsdl:message name="IUserService_AddUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:AddUserResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_AddUser_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q4="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q4:GenericFault" />
   </wsdl:message>
   <wsdl:message name="IUserService_RemoveUser_InputMessage">
     <wsdl:part name="parameters" element="tns:RemoveUser" />
@@ -31,11 +49,17 @@
   <wsdl:message name="IUserService_RemoveUser_OutputMessage">
     <wsdl:part name="parameters" element="tns:RemoveUserResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_RemoveUser_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q5="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q5:GenericFault" />
+  </wsdl:message>
   <wsdl:message name="IUserService_SetName_InputMessage">
     <wsdl:part name="parameters" element="tns:SetName" />
   </wsdl:message>
   <wsdl:message name="IUserService_SetName_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_SetName_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q6="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q6:GenericFault" />
   </wsdl:message>
   <wsdl:message name="IUserService_SetAge_InputMessage">
     <wsdl:part name="parameters" element="tns:SetAge" />
@@ -43,42 +67,85 @@
   <wsdl:message name="IUserService_SetAge_OutputMessage">
     <wsdl:part name="parameters" element="tns:SetAgeResponse" />
   </wsdl:message>
+  <wsdl:message name="IUserService_SetAge_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q7="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q7:GenericFault" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Ping_InputMessage">
+    <wsdl:part name="parameters" element="tns:Ping" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Ping_OutputMessage">
+    <wsdl:part name="parameters" element="tns:PingResponse" />
+  </wsdl:message>
+  <wsdl:message name="IUserService_Ping_GenericFaultFault_FaultMessage">
+    <wsdl:part xmlns:q8="http://schemas.datacontract.org/2004/07/soapapi" name="detail" element="q8:GenericFault" />
+  </wsdl:message>
   <wsdl:portType name="IUserService">
-    <wsdl:operation name="GetUser">
-      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUser" message="tns:IUserService_GetUser_InputMessage" />
-      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserResponse" message="tns:IUserService_GetUser_OutputMessage" />
+    <wsdl:operation name="GetUserById">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserById" message="tns:IUserService_GetUserById_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserByIdResponse" message="tns:IUserService_GetUserById_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/GetUserByIdGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_GetUserById_GenericFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUserByName" message="tns:IUserService_GetUserByName_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUserByNameResponse" message="tns:IUserService_GetUserByName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/GetUserByNameGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_GetUserByName_GenericFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="GetUsers">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/GetUsers" message="tns:IUserService_GetUsers_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/GetUsersResponse" message="tns:IUserService_GetUsers_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/GetUsersGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_GetUsers_GenericFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="AddUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/AddUser" message="tns:IUserService_AddUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/AddUserResponse" message="tns:IUserService_AddUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/AddUserGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_AddUser_GenericFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="RemoveUser">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/RemoveUser" message="tns:IUserService_RemoveUser_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/RemoveUserResponse" message="tns:IUserService_RemoveUser_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/RemoveUserGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_RemoveUser_GenericFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetName">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/SetName" message="tns:IUserService_SetName_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/SetNameResponse" message="tns:IUserService_SetName_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/SetNameGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_SetName_GenericFaultFault_FaultMessage" />
     </wsdl:operation>
     <wsdl:operation name="SetAge">
       <wsdl:input wsaw:Action="http://tempuri.org/IUserService/SetAge" message="tns:IUserService_SetAge_InputMessage" />
       <wsdl:output wsaw:Action="http://tempuri.org/IUserService/SetAgeResponse" message="tns:IUserService_SetAge_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/SetAgeGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_SetAge_GenericFaultFault_FaultMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <wsdl:input wsaw:Action="http://tempuri.org/IUserService/Ping" message="tns:IUserService_Ping_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IUserService/PingResponse" message="tns:IUserService_Ping_OutputMessage" />
+      <wsdl:fault wsaw:Action="http://tempuri.org/IUserService/PingGenericFaultFault" name="GenericFaultFault" message="tns:IUserService_Ping_GenericFaultFault_FaultMessage" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="BasicHttpBinding_IUserService" type="tns:IUserService">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsdl:operation name="GetUser">
-      <soap:operation soapAction="http://tempuri.org/IUserService/GetUser" style="document" />
+    <wsdl:operation name="GetUserById">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetUserById" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="GetUserByName">
+      <soap:operation soapAction="http://tempuri.org/IUserService/GetUserByName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="GetUsers">
       <soap:operation soapAction="http://tempuri.org/IUserService/GetUsers" style="document" />
@@ -88,6 +155,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="AddUser">
       <soap:operation soapAction="http://tempuri.org/IUserService/AddUser" style="document" />
@@ -97,6 +167,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="RemoveUser">
       <soap:operation soapAction="http://tempuri.org/IUserService/RemoveUser" style="document" />
@@ -106,6 +179,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SetName">
       <soap:operation soapAction="http://tempuri.org/IUserService/SetName" style="document" />
@@ -115,6 +191,9 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
     <wsdl:operation name="SetAge">
       <soap:operation soapAction="http://tempuri.org/IUserService/SetAge" style="document" />
@@ -124,6 +203,21 @@
       <wsdl:output>
         <soap:body use="literal" />
       </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="Ping">
+      <soap:operation soapAction="http://tempuri.org/IUserService/Ping" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+      <wsdl:fault name="GenericFaultFault">
+        <soap:fault use="literal" name="GenericFaultFault" namespace="" />
+      </wsdl:fault>
     </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="UserService">

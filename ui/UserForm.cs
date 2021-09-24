@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ServiceModel;
 using System.Windows.Forms;
 using ui.Core;
 using ui.SpecFlowSOAP;
@@ -35,43 +36,40 @@ namespace ui
             }
         }
 
-        private void AddUserButton_Click(object sender, EventArgs e)
+        private void AddUserButton_Click(object sender, EventArgs args)
         {
-            bool valid = true;
-
             if (string.IsNullOrEmpty(NameTextBox.Text))
             {
                 AddError("Name Required");
-                valid = false;
+                return;
             }
-
-            if (string.IsNullOrEmpty(NameTextBox.Text))
-            {
-                AddError("Age Required");
-                valid = false;
-            }
-
-            if (!valid) return;
-
 
             var user = new User()
             {
                 Name = NameTextBox.Text,
-                Age = int.Parse(AgeNumericUpDown.Text),
+                Age = Convert.ToInt32(AgeNumericUpDown.Value),
             };
-            _userProvider.AddUser(user);
+
+            try
+            {
+                _userProvider.AddUser(user);
+            }
+            catch (FaultException<GenericFault> e)
+            {
+                AddError(e.Detail.Message, e.Detail.ResponseCode);
+            }
 
             GetUsers();
         }
 
         private void SaveChangesButton_Click(object sender, EventArgs e)
         {
-            var selectedUser = UserListBox.SelectedItem as User;
-            if (selectedUser == null)
+            if (!(UserListBox.SelectedItem is User selectedUser))
             {
                 AddError("Select a user to save changes");
                 return;
             }
+
             _userProvider.SetName(selectedUser.Id, NameTextBox.Text);
             _userProvider.SetAge(selectedUser.Id, int.Parse(AgeNumericUpDown.Text));
 
@@ -82,8 +80,7 @@ namespace ui
 
         private void DeleteUserButton_Click(object sender, EventArgs e)
         {
-            var selectedUser = UserListBox.SelectedItem as User;
-            if (selectedUser == null)
+            if (!(UserListBox.SelectedItem is User selectedUser))
             {
                 AddError("To delete a user select one from the list");
                 return;
@@ -97,6 +94,7 @@ namespace ui
             UserListBox.ClearSelected();
             AddUserButton.Enabled = true;
             SelectedUserLabel.Enabled = false;
+            ClearSelectionButton.Enabled = false;
         }
 
         private void UserListBox_Format(object sender, ListControlConvertEventArgs e)
@@ -113,6 +111,7 @@ namespace ui
                 ClearFields();
                 SaveChangesButton.Enabled = false;
                 AddUserButton.Enabled = true;
+                ClearSelectionButton.Enabled = false;
             }
             else
             {
@@ -122,6 +121,7 @@ namespace ui
 
                 SaveChangesButton.Enabled = true;
                 AddUserButton.Enabled = false;
+                ClearSelectionButton.Enabled = true;
             }
         }
 
@@ -132,9 +132,14 @@ namespace ui
             AgeNumericUpDown.Text = string.Empty;
         }
 
-        private void AddError(string error)
+        private void AddError(string error, int responseCode = 0)
         {
-            Errors.Text += $"{error}\r\n";
+            if (responseCode != 0)
+            {
+                Errors.Text += $"HTTP Error Code: {responseCode}\r\n";
+            }
+       
+            Errors.Text += $"{error}\r\n\r\n";
         }
     }
 }

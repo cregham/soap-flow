@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using System.ServiceModel;
 
 namespace soapapi
 {
@@ -31,19 +32,20 @@ namespace soapapi
         public void SetName(int id, string name)
         {
             var user = Users.FirstOrDefault(f => f.Id == id);
-            if (user == null) throw new Exception(string.Format(@"User with ID [{0}] not found.", id));
+            if (user == null) SendGenericFault(418, string.Format(@"User with ID [{0}] not found.", id));
             user.Name = name;
         }
 
         public void SetAge(int id, int age)
         {
             var user = Users.FirstOrDefault(f => f.Id == id);
-            if (user == null) throw new Exception(string.Format(@"User with ID [{0}] not found.", id));
+            if (user == null) SendGenericFault(418, string.Format(@"User with ID [{0}] not found.", id));
             user.Age = age;
         }
 
         public void AddUser(User user)
         {
+            if (Users.Any(a => a.Name == user.Name)) SendGenericFault(418, "User with name already exists");
             var maxId =  Users.Max(u => u.Id);
             user.Id = maxId + 1;
             Array.Resize(ref _users, Users.Length + 1);
@@ -53,8 +55,17 @@ namespace soapapi
         public void RemoveUser(int id)
         {
             var user = Users.FirstOrDefault(f => f.Id == id);
+            if (user == null) SendGenericFault(418, string.Format(@"User with ID [{0}] not found.", id));
             var index = Array.IndexOf(Users, user);
             Users = Users.RemoveAt(index);
+        }
+
+        private void SendGenericFault(int responseCode, string message)
+        {
+            GenericFault fault = new GenericFault(){ResponseCode = responseCode, Message = message};
+            FaultReason faultReason = new FaultReason("Invalid user");
+
+            throw new FaultException<GenericFault>(fault);
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System;
+using automation.Core;
 using TestStack.White;
 using TestStack.White.Factory;
 using ui.Core;
@@ -15,7 +16,7 @@ namespace automation.Drivers
                 System.Reflection.Assembly.GetExecutingAssembly().GetName().CodeBase);
             path = path?.Substring(6);
 
-            _client = Application.Launch(QuickSetup.ExeLocation);
+            _client = Application.Launch(Settings.ExeLocation);
 
             var window = _client.GetWindow("Users", InitializeOption.NoCache);
             window.WaitWhileBusy();

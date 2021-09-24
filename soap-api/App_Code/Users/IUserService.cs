@@ -6,21 +6,38 @@ namespace soapapi
     [ServiceContract]
     public interface IUserService
     {
+        [OperationContract]
+        [FaultContract(typeof(GenericFault))]
+        User GetUserById(int id);
 
         [OperationContract]
-        User GetUser(int id);
+        [FaultContract(typeof(GenericFault))]
+        User GetUserByName(string name);
+
 
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         User[] GetUsers();
 
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         void AddUser(User user);
+
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         void RemoveUser(int id);
+
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         void SetName(int id, string name);
+
         [OperationContract]
+        [FaultContract(typeof(GenericFault))]
         void SetAge(int id, int age);
+
+        [OperationContract]
+        [FaultContract(typeof(GenericFault))]
+        bool Ping();
     }
 
 // Use a data contract as illustrated in the sample below to add composite types to service operations.

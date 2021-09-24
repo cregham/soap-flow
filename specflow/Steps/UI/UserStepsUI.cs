@@ -6,7 +6,7 @@ using TechTalk.SpecFlow;
 namespace automation.Steps.UI
 {
     [Binding]
-    public class GetUsersUI
+    public class UserStepsUI
     {
         private UIClient _client;
 
@@ -16,18 +16,10 @@ namespace automation.Steps.UI
             _client = GlobalHook.Client;
         }
 
-
-        [When(@"I click the 'Get Users' button")]
-        public void WhenIClickTheGetUsersButton()
-        {
-            _client.MainWindow.ClickGetUsers();
-
-        }
-
-        [Then("The users should populate the listbox")]
+        [Then("the users should populate the listbox")]
         public void ThenUsersShouldPopulateTheListBox()
         {
-          Assert.IsTrue( _client.MainWindow.CheckUserCount() > 0);
+            Assert.IsTrue(_client.MainWindow.CheckUserCount() > 0);
         }
     }
 }

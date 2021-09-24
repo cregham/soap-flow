@@ -54,13 +54,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Features\UI\GetUsers.feature.cs">
-      <DependentUpon>GetUsers.feature</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <SpecFlowFeatureFiles Update="Features\UI\GetUsers.feature">
+    <SpecFlowFeatureFiles Update="Features\UI\Users.feature">
       <Visible>$(UsingMicrosoftNETSdk)</Visible>
       <CodeBehindFile>%(RelativeDir)%(Filename).feature$(DefaultLanguageSourceExtension)</CodeBehindFile>
     </SpecFlowFeatureFiles>

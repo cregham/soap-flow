@@ -4,7 +4,7 @@ using System.ServiceModel;
 // NOTE: You can use the "Rename" command on the "Refactor" menu to change the class name "Service" in code, svc and config file together.
 namespace soapapi
 {
-    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single)]
+    [ServiceBehavior(InstanceContextMode = InstanceContextMode.Single, IncludeExceptionDetailInFaults = true)]
     public class UserService : IUserService
     {
         private readonly MockUserData _mockData;
@@ -14,10 +14,14 @@ namespace soapapi
             _mockData = new MockUserData();
         }
 
-        public User GetUser(int id)
+        public User GetUserById(int id)
         {
-            var user = _mockData.Users.FirstOrDefault(u => u.Id == id);
-            return user;
+            return _mockData.Users.FirstOrDefault(u => u.Id == id);
+        }
+
+        public User GetUserByName(string name)
+        {
+            return _mockData.Users.FirstOrDefault(u => u.Name == name);
         }
 
         public User[] GetUsers()
@@ -43,6 +47,12 @@ namespace soapapi
         public void SetAge(int id, int age)
         { 
             _mockData.SetAge(id, age);
+        }
+
+        //Hack to check if a WCF service is running
+        public bool Ping()
+        {
+            return true;
         }
     }
 }
