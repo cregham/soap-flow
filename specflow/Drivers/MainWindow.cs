@@ -8,7 +8,7 @@ namespace automation.Drivers
     public class MainWindow : UserInterfaceObject
     {
         public Button GetUsers => Button("GetUsersButton");
-        public ListBox ClientListBox => ListBox("ClientListBox");
+        public ListBox ClientListBox => ListBox("UserListBox");
         public MainWindow(Window page) : base(page)
         {
         }
